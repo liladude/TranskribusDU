@@ -114,7 +114,7 @@ class DU_JSON_Invoice_v1(DU_CRF_Task):
         if you play with a toy collection, which does not have all expected classes, you can reduce those.
         """
         #HACK
-        if False:
+        if True:
             lActuallySeen = ['i_OUTSIDE', 'i_BEGINNING NUMBER',  'i_BEGINNING DATE']
             lActuallySeen_index = [lLabels.index(s[2:]) for s in lActuallySeen]
             if lActuallySeen:
@@ -157,11 +157,11 @@ class DU_JSON_Invoice_v1(DU_CRF_Task):
                      , sModelName, sModelDir
                      , DU_GRAPH
                      , dFeatureConfig = {  
-                              'n_tfidf_node':None
-                            , 't_ngrams_node':(2,4)
+                              'n_tfidf_node':10000  #number of ngrams selected by tfidf for node's text
+                            , 't_ngrams_node':(1,4) #1 is required, for instance to have a chance to capture $ signs
                             , 'b_tfidf_node_lc':None
-                            , 'n_tfidf_edge':None
-                            , 't_ngrams_edge':(2,4)
+                            , 'n_tfidf_edge':3000   #number of ngram per source/target node, per edge, per type of edge
+                            , 't_ngrams_edge':(1,4)
                             , 'b_tfidf_edge_lc':None
                          }
                      , dLearnerConfig = {
