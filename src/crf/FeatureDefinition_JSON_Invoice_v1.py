@@ -34,7 +34,7 @@ from crf.Transformer import RobustStandardScaler as StandardScaler
 from sklearn.feature_extraction.text import TfidfVectorizer
 
 from crf.Transformer import SparseToDense
-from crf.Transformer_JSON_Invoice import NodeTransformerTextEnclosed, NodeTransformerTextLen, NodeTransformerXYWH, NodeTransformerNeighbors, Node1HotFeatures
+from crf.Transformer_JSON_Invoice import NodeTransformerTextEnclosed, NodeTransformerTextLen, NodeTransformerXYWH, NodeTransformerNeighbors, Node1HotFeatures, NodeTransformerInvoice
 from crf.Transformer_JSON_Invoice import Edge1HotFeatures, EdgeBooleanFeatures, EdgeNumericalSelector, EdgeTransformerSourceText, EdgeTransformerTargetText
 from crf.PageNumberSimpleSequenciality import PageNumberSimpleSequenciality
 
@@ -81,6 +81,10 @@ class FeatureDefinition_JSON_Invoice_v1(FeatureDefinition):
                                        )
                                     , ("1hot", Pipeline([
                                                          ('1hot', Node1HotFeatures())  #does the 1-hot encoding directly
+                                                         ])
+                                       )
+                                    , ('invoice' , Pipeline([
+                                                         ('invoice', NodeTransformerInvoice())
                                                          ])
                                        )
 #                                     , ('ocr' , Pipeline([

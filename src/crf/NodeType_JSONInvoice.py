@@ -82,6 +82,14 @@ class NodeType_JSONInvoice(NodeType):
         blk = Block(page, (x1, y1, x2-x1, y2-y1), sText, orientation
                     , classIndex, self, ndBlock, domid=domid)
 
+        #precompute binary features here, since we will get rid of the json data ASAP
+        dFeat = data["features"]
+        blk.lfYesNoFeat = [ 1.0 if dFeat[aspect] == "YES" else 0.0 \
+                         for aspect in\
+                          ["LineMathFeatures.isFactor", "LineMathFeatures.isProduct", "hasDigits"
+                           , "isKnownCity", "isKnownCountry", "isKnownZip"
+                           , "parsesAsAmount", "parsesAsDate", "parsesAsNumber"]\
+                         ]
         
         return blk
     
