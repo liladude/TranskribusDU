@@ -73,7 +73,7 @@ class EmptySafe_StandardScaler(StandardScaler):
     """
     Same as its super class apart that it  does not crash when th einput array is empty
     """
-    def transform(self, X, y=None, copy=None):
+    def transform(self, X, y='deprecated', copy=None):
         try:
             return StandardScaler.transform(self, X, y, copy)
         except ValueError as e:
