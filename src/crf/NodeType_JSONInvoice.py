@@ -131,9 +131,12 @@ class NodeType_JSONInvoice(NodeType):
         return sLabel
 
 
-    def setDomNodeLabel(self, domnode, sLabel):
+    def setDomNodeLabel(self, jsonDat, sLabel):
         """
         Set the DOM node label in the format-dependent way
+        
+        
         """
-        raise Exception("NOT YET IMPLEMENTED")
+        sAppLabel = self.dLabel2XmlLabel[sLabel]
+        jsonDat["labels"] = { sAppLabel:1.0 }
         return sLabel
