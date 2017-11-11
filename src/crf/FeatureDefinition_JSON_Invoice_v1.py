@@ -30,7 +30,8 @@ import numpy as np
 from sklearn.pipeline import Pipeline, FeatureUnion
 #not robust to empty arrays, so use our robust intermediary class instead
 #from sklearn.preprocessing import StandardScaler
-from crf.Transformer import RobustStandardScaler as StandardScaler
+#from crf.Transformer import RobustStandardScaler as StandardScaler
+from crf.Transformer import EmptySafe_QuantileTransformer as QuantileTransformer
 from sklearn.feature_extraction.text import TfidfVectorizer
 
 from crf.Transformer import SparseToDense
@@ -66,17 +67,20 @@ class FeatureDefinition_JSON_Invoice_v1(FeatureDefinition):
                                     , 
                                     ("textlen", Pipeline([
                                                          ('selector', NodeTransformerTextLen()),
-                                                         ('textlen', StandardScaler(copy=False, with_mean=True, with_std=True))  #use in-place scaling
+                                                         #('textlen', StandardScaler(copy=False, with_mean=True, with_std=True))  #use in-place scaling
+                                                         ('textlen', QuantileTransformer(n_quantiles=self.n_QUANTILES, copy=False))  #use in-place scaling
                                                          ])
                                        )
                                     , ("xywh", Pipeline([
                                                          ('selector', NodeTransformerXYWH()),
-                                                         ('xywh', StandardScaler(copy=False, with_mean=True, with_std=True))  #use in-place scaling
+                                                         #('xywh', StandardScaler(copy=False, with_mean=True, with_std=True))  #use in-place scaling
+                                                         ('xywh', QuantileTransformer(n_quantiles=self.n_QUANTILES, copy=False))  #use in-place scaling
                                                          ])
                                        )
                                     , ("neighbors", Pipeline([
                                                          ('selector', NodeTransformerNeighbors()),
-                                                         ('neighbors', StandardScaler(copy=False, with_mean=True, with_std=True))  #use in-place scaling
+                                                         #('neighbors', StandardScaler(copy=False, with_mean=True, with_std=True))  #use in-place scaling
+                                                         ('neighbors', QuantileTransformer(n_quantiles=self.n_QUANTILES, copy=False))  #use in-place scaling
                                                          ])
                                        )
                                     , ("1hot", Pipeline([
@@ -113,7 +117,8 @@ class FeatureDefinition_JSON_Invoice_v1(FeatureDefinition):
                                         )
                                     , ("numerical", Pipeline([
                                                          ('selector', EdgeNumericalSelector()),
-                                                         ('numerical', StandardScaler(copy=False, with_mean=True, with_std=True))  #use in-place scaling
+                                                         #('numerical', StandardScaler(copy=False, with_mean=True, with_std=True))  #use in-place scaling
+                                                         ('numerical', QuantileTransformer(n_quantiles=self.n_QUANTILES, copy=False))  #use in-place scaling
                                                          ])
                                         )
                                     , ("sourcetext0", Pipeline([
