@@ -114,15 +114,16 @@ class DU_ABPTable(DU_CRF_Task):
         if you play with a toy collection, which does not have all expected classes, you can reduce those.
         """
         #HACK
-        lActuallySeen = ['i_OUTSIDE', 'i_BEGINNING NUMBER',  'i_BEGINNING DATE']
-        lActuallySeen_index = [lLabels.index(s[2:]) for s in lActuallySeen]
-        if lActuallySeen:
-            print "REDUCING THE CLASSES TO THOSE SEEN IN TRAINING"
-            lIgnoredLabels  = [lLabels[i] for i in range(len(lLabels)) if i not in lActuallySeen_index]
-            lLabels         = [lLabels[i] for i in lActuallySeen_index ]
-            print len(lLabels)          , lLabels
-            print len(lIgnoredLabels)   , lIgnoredLabels
-            nbClass = len(lLabels) + 1  #because the ignored labels will become OTHER
+        if False:
+            lActuallySeen = ['i_OUTSIDE', 'i_BEGINNING NUMBER',  'i_BEGINNING DATE']
+            lActuallySeen_index = [lLabels.index(s[2:]) for s in lActuallySeen]
+            if lActuallySeen:
+                print "REDUCING THE CLASSES TO THOSE SEEN IN TRAINING"
+                lIgnoredLabels  = [lLabels[i] for i in range(len(lLabels)) if i not in lActuallySeen_index]
+                lLabels         = [lLabels[i] for i in lActuallySeen_index ]
+                print len(lLabels)          , lLabels
+                print len(lIgnoredLabels)   , lIgnoredLabels
+                nbClass = len(lLabels) + 1  #because the ignored labels will become OTHER
         
         #DEFINING THE CLASS OF GRAPH WE USE
         DU_GRAPH = Graph_JSON
