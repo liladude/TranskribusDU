@@ -44,7 +44,7 @@ from DU_CRF_Task import DU_CRF_Task
 from crf.FeatureDefinition_JSON_Invoice_v1 import FeatureDefinition_JSON_Invoice_v1
 
  
-class DU_ABPTable(DU_CRF_Task):
+class DU_JSON_Invoice_v1(DU_CRF_Task):
     """
     We will do a CRF model for a DU task
     , with the below labels 
@@ -264,7 +264,7 @@ if __name__ == "__main__":
         traceln("Specify a model folder and a model name!")
         _exit(usage, 1, e)
         
-    doer = DU_ABPTable(sModelName, sModelDir,
+    doer = DU_JSON_Invoice_v1(sModelName, sModelDir,
                       C                 = options.crf_C,
                       tol               = options.crf_tol,
                       njobs             = options.crf_njobs,
