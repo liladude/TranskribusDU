@@ -75,6 +75,14 @@ class NodeType_JSONInvoice(NodeType):
             x1,y1, x2,y2 = [ int(round(v)) for v in [x1+dx,y1+dy, x2-dx,y2-dy] ]
                     
         sText = data["text"]
+        
+#         #to check the behavior of the TfIDF transformer...
+#         import string, random
+#         s = ""
+#         for ik in range(4):
+#             word = "".join( [random.choice(string.letters) for iii in xrange(14)] )
+#             s += " " + word
+#         sText = s
         orientation = 0  #unless we have more info from pdf2xml²
         classIndex = 0   #is computed later on
         ndBlock = data   #equivalent to the xml structure
