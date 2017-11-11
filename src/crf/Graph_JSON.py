@@ -136,9 +136,24 @@ class Graph_JSON(Graph):
         Detach the graph from the DOM node, which can then be freed
         """
         if self.doc != None:
-#             for nd in self.lNode: nd.detachFromDOM()
+            for nd in self.lNode: nd.detachFromDOM()
 #             self.doc.freeDoc()
             self.doc = None
+            
+    def setDomLabels(self, Y):
+        """
+        Set the labels of the graph nodes from the Y matrix
+        the node attribute contains the JSON data for that node
+        return the JSON
+        """
+        lJSONNode = []
+        for i,nd in enumerate(self.lNode):
+            sLabel = self._dLabelByCls[ Y[i] ]
+            nd.type.setDomNodeLabel(nd.node, sLabel)
+            lJSONNode.append(nd.node)
+        self.doc = lJSONNode
+        return self.doc
+            
 
         
 
