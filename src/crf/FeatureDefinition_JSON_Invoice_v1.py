@@ -42,6 +42,7 @@ from crf.PageNumberSimpleSequenciality import PageNumberSimpleSequenciality
 from FeatureDefinition import FeatureDefinition
 
 class FeatureDefinition_JSON_Invoice_v1(FeatureDefinition):
+    n_QUANTILES = 32
     
     def __init__(self, n_tfidf_node=None, t_ngrams_node=None, b_tfidf_node_lc=None
                      , n_tfidf_edge=None, t_ngrams_edge=None, b_tfidf_edge_lc=None): 
@@ -64,8 +65,7 @@ class FeatureDefinition_JSON_Invoice_v1(FeatureDefinition):
                                                        ('todense', SparseToDense())  #pystruct needs an array, not a sparse matrix
                                                        ])
                                      )
-                                    , 
-                                    ("textlen", Pipeline([
+                                    , ("textlen", Pipeline([
                                                          ('selector', NodeTransformerTextLen()),
                                                          #('textlen', StandardScaler(copy=False, with_mean=True, with_std=True))  #use in-place scaling
                                                          ('textlen', QuantileTransformer(n_quantiles=self.n_QUANTILES, copy=False))  #use in-place scaling
